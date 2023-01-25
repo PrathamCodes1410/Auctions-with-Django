@@ -12,6 +12,10 @@
           <h2 class="card-title">{{ p.title }}</h2>
           <p class="card-text">{{ p.description }}</p>
           <br>
+          <h4 class="card-text">Listed By: {{ p.owner }}</h4>
+          <br>
+          <h4 class="card-text">Minimum Bid: Rs.{{ p.price }}</h4>
+          <br>
           <br>
           <form>
             <label class="form-label">Your Bid</label>
@@ -19,6 +23,21 @@
             <br>
             <button type="submit" class="btn btn-primary">Place your bid</button>
           </form>
+          <br>
+          <br>
+            <!--{%  %}-->
+              <form action="{% url 'Add_watchlist' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{ product.title }}" name="title">
+                <button type="submit" class="btn btn-danger">Remove from watchlist</button>
+              </form>
+            <!--{% else %}-->
+              <form action="{% url 'Sub_watchlist' %}" method="POST">
+                <!--{% csrf_token %}-->
+                <input type="hidden" value="{{ product.title }}" name="title">
+                <button type="submit" class="btn btn-success">Add to Watchlist</button>
+              </form>
+            <!--{% endif %}-->
         </div>
       </div>
     </div>

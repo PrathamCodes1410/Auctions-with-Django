@@ -32,11 +32,13 @@
             <li class="list-group-item">{{ d.owner }}</li>
         </ul>
         <div class="card-body">
-            <form action="{% url 'list' %}" method="POST">
+            <a href="{% url 'list' id=d.id %}" class="btn btn-primary">Place your bid</a>
+            <!--<form action="{% url 'list' id=d.id %}" method="POST">
                 {% csrf_token %}
+                <input type="hidden" value="{{ d.id }}" name="id">
                 <input type="hidden" value="{{ d.title }}" name="title">
                 <button type="submit" style="color: white" class="btn btn-primary">Place your Bid</button>
-            </form>
+            </form>-->
         </div>
     </div>
     {% endfor %}
