@@ -9,35 +9,19 @@ from .models import User, category, listing, bids
 
 
 @login_required(login_url='/login') #decorater imported
-def listing_display(request, id):
-    #if request.method == 'POST':
-    #user = request.user
-        #title = request.POST["title"]
-    item = listing.objects.filter(pk=id)
+def listing_display(request):
+    if request.method == 'POST':
+        title = request.POST["title"]
+        item = listing.objects.filter(title=title)
         #bid = bids.objects.filter(product_title=title)
-    return render(request, "auctions/f.html", {"product": item})
+        return render(request, "auctions/display.html", {"product": item})
 
-def Sub_watchlist(request):
-    title = request.POST("title")
-    listingData = listing.objects.get(title=title)
-    currentUser = request.user
-    listingData.watchList.add(currentUser)
-    return HttpResponseRedirect(reverse("listing_display"))
-
-def Add_watchlist(request):
-    title = request.POST("title")
-    listingData = listing.objects.get(title=title)
-    currentUser = request.user
-    listingData.watchList.add(currentUser)
-    return HttpResponseRedirect(reverse("listing_display"))
+def watchlist(request):
+    user = request.user()
+    pass
 
 #def Display_watchlist(request):
 #   pass
-
-def F_listing(request, id):
-    pass
-
-
 
 
 def index(request):
